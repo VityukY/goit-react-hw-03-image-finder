@@ -1,8 +1,12 @@
 body {
+      background-color: aqua;
+      padding-bottom: 100px;
+}
+#root {
    width: 1600px;
    margin-left: auto;
    margin-right: auto;
-   background-color: aqua;
+
 }
 
 .Searchbar {
@@ -27,9 +31,6 @@ body {
       width: 250px;
       height: 250px;
       overflow: hidden;
-
-
-
 }
 .loadButton {
    margin-left: auto;

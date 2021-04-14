@@ -1,12 +1,12 @@
 import { Component } from 'react';
+import { animateScroll as scroll } from 'react-scroll';
 import Loader from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import SearchBar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import fetchImg from './components/services/featchImg';
 import Modal from './components/Modal';
-import { animateScroll as scroll } from 'react-scroll';
 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 class App extends Component {
    state = {
       images: [],
@@ -67,11 +67,10 @@ class App extends Component {
             {isLoading && (
                <div className="loader">
                   <Loader
-                     type="Puff"
+                     type="BallTriangle"
                      color="#00BFFF"
-                     height={100}
-                     width={100}
-                     className="loader"
+                     height={80}
+                     width={80}
                   />
                </div>
             )}
