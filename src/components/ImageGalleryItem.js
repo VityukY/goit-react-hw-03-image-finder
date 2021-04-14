@@ -1,7 +1,13 @@
-const ImageGalleryItem = ({ id, url }) => {
+const ImageGalleryItem = ({ id, url, onClickHandler }) => {
    return (
       <li className="ImageGalleryItem" key={id}>
-         <img src={url} alt="noalt" className="ImageGalleryItem-image" width='250' height='160' />
+         <img
+            src={url}
+            alt="noalt"
+            className="ImageGalleryItem-image"
+            height="200"
+            onClick={onClickHandler}
+         />
       </li>
    );
 };

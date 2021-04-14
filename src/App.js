@@ -1,44 +1,93 @@
 import { Component } from 'react';
-
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import SearchBar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import fetchImg from './components/services/featchImg';
-
+import Modal from './components/Modal';
+import { animateScroll as scroll } from 'react-scroll';
 
 class App extends Component {
    state = {
       images: [],
       currentQuery: '',
       currentPage: 1,
+      largeImage: '',
+      isLoading: false,
    };
+
    componentDidUpdate(prevProps, prevState) {
       if (prevState.currentQuery !== this.state.currentQuery) {
-         this.loadImg();
+         this.fetchImages();
       }
    }
    formHandler = value => {
       this.setState({ currentQuery: value, currentPage: 1, images: [] });
    };
 
-   loadImg = () => {
+   modalToggle = () => {
+      this.setState({ largeImage: '' });
+   };
+   loaderToogle = () => {
+      this.setState(prevState => ({
+         isLoading: !prevState.isLoading,
+      }));
+   };
+   fetchImages = () => {
       const { currentQuery, currentPage } = this.state;
-      fetchImg(currentQuery, currentPage).then(respons => {
-         this.setState(prevState => ({
-            images: [...prevState.images, ...respons.data.hits],
-            currentPage: prevState.currentPage + 1,
-         }));
-      });
+
+      this.loaderToogle();
+
+      fetchImg(currentQuery, currentPage)
+         .then(newImages => {
+            this.setState(prevState => ({
+               images: [...prevState.images, ...newImages],
+               currentPage: prevState.currentPage + 1,
+            }));
+         })
+         .finally(() => {
+            this.loaderToogle();
+            this.scrollTo();
+         });
+   };
+   getLargeImage = largeURL => {
+      this.setState({ largeImage: largeURL });
+   };
+
+   scrollTo = () => {
+      scroll.scrollToBottom();
    };
 
    render() {
+      const { images, largeImage, isLoading } = this.state;
       return (
          <>
             <SearchBar submitHandler={this.formHandler} />
-            <ImageGallery images={this.state.images} />
-            {this.state.images.length !== 0 && (
-               <button type="button" onClick={this.loadImg} className='loadButton'>
+            <ImageGallery images={images} getLargeImage={this.getLargeImage} />
+            {isLoading && (
+               <div className="loader">
+                  <Loader
+                     type="Puff"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                     className="loader"
+                  />
+               </div>
+            )}
+
+            {images.length !== 0 && (
+               <button
+                  type="button"
+                  onClick={this.fetchImages}
+                  className="loadButton"
+               >
                   Load more...
                </button>
+            )}
+
+            {largeImage.length > 0 && (
+               <Modal modalToogle={this.modalToggle} imgURL={largeImage} />
             )}
          </>
       );
