@@ -3,7 +3,7 @@ import { Component } from 'react';
 import SearchBar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import fetchImg from './components/services/featchImg';
-import './App.css';
+
 
 class App extends Component {
    state = {
@@ -36,7 +36,7 @@ class App extends Component {
             <SearchBar submitHandler={this.formHandler} />
             <ImageGallery images={this.state.images} />
             {this.state.images.length !== 0 && (
-               <button type="button" onClick={this.loadImg}>
+               <button type="button" onClick={this.loadImg} className='loadButton'>
                   Load more...
                </button>
             )}

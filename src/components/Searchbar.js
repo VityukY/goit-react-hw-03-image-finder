@@ -18,11 +18,7 @@ class SearchBar extends Component {
       return (
          <header className="Searchbar">
             <form className="SearchForm" onSubmit={this.submitHandler}>
-               <button type="submit" className="SearchForm-button">
-                  <span className="SearchForm-button-label">Search</span>
-               </button>
-
-               <input
+                  <input
                   onChange={this.handleChange}
                   className="SearchForm-input"
                   type="text"
@@ -31,6 +27,12 @@ class SearchBar extends Component {
                   placeholder="Search images and photos"
                   value={this.state.query}
                />
+
+               <button type="submit" className="SearchForm-button">
+                  <span className="SearchForm-button-label">Search</span>
+               </button>
+
+
             </form>
          </header>
       );
