@@ -1,7 +1,7 @@
 const ImageGalleryItem = ({ id, url }) => {
    return (
-      <li key={id} className="ImageGalleryItem">
-         <img src={url} alt="" className="ImageGalleryItem-image" />
+      <li className="ImageGalleryItem" key={id}>
+         <img src={url} alt="noalt" className="ImageGalleryItem-image" />
       </li>
    );
 };
