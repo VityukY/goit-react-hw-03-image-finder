@@ -12,7 +12,7 @@ class App extends Component {
       images: [],
       currentQuery: '',
       currentPage: 1,
-      largeImage: '',
+      largeImage: null,
       isLoading: false,
    };
 
@@ -85,7 +85,7 @@ class App extends Component {
                </button>
             )}
 
-            {largeImage.length > 0 && (
+            {largeImage > 0 && (
                <Modal modalToogle={this.modalToggle} imgURL={largeImage} />
             )}
          </>
