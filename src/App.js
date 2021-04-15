@@ -75,7 +75,7 @@ class App extends Component {
                </div>
             )}
 
-            {images.length !== 0 && (
+            {images.length !== 0 && !isLoading && (
                <button
                   type="button"
                   onClick={this.fetchImages}
